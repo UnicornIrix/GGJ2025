@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://voih14wq5mrg"]
+
+[ext_resource type="Script" path="res://control_script.cs" id="1_r1a4b"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r1a4b")
+
+[node name="titolo_gioco" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 527.0
+offset_top = 31.0
+offset_right = 725.0
+offset_bottom = 69.0
+bbcode_enabled = true
+text = "[center] nome gioco [center]"
+
+[node name="start" type="Button" parent="."]
+layout_mode = 0
+offset_left = 491.0
+offset_top = 176.0
+offset_right = 771.0
+offset_bottom = 281.0
+text = "START"
+
+[node name="credits" type="Button" parent="."]
+layout_mode = 0
+offset_left = 492.0
+offset_top = 365.0
+offset_right = 772.0
+offset_bottom = 476.0
+text = "CREDITS"
+
+[connection signal="pressed" from="start" to="." method="start_game"]
