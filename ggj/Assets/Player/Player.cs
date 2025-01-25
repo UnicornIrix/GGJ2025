@@ -52,7 +52,7 @@ public partial class Player : CharacterBody2D
 		}
 
 		Velocity = velocity;
-		animTree.Set("parameters/blend_position", velocity);
+		animTree.Set("parameters/blend_position", lastDir);
 		MoveAndSlide();
 	}
 
