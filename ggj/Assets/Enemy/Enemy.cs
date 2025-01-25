@@ -173,13 +173,11 @@ public partial class Enemy : CharacterBody2D
 	}
 
 	public void Hitted(){
-		if(health <= 0)
-		{
-			Dead();
-			return;
-		}
-
 		health -= 1;
+
+		if(health <= 0)
+			Dead();
+
 	}
 
 	public void Area2DBodyEntered(Node2D body){
