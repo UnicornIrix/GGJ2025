@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8rkaqsio0tvb"]
+
+[ext_resource type="Texture2D" uid="uid://fueikpkpt8lh" path="res://icon.svg" id="1_drb5h"]
+[ext_resource type="Script" path="res://Assets/Enemy/Enemy.cs" id="1_ekytm"]
+[ext_resource type="PackedScene" uid="uid://d0lqrxraktaya" path="res://Assets/Gun/EnemyGun.tscn" id="3_1h57y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2ft2"]
+size = Vector2(130, 128)
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_51v8l"]
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("animTree", "gun", "timeBetweenShootTimer")]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_ekytm")
+animTree = NodePath("AnimationTree")
+gun = NodePath("EnemyGun")
+timeBetweenShootTimer = NodePath("Timer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.0666667, 1, 1)
+texture = ExtResource("1_drb5h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_h2ft2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeBlendSpace2D_51v8l")
+anim_player = NodePath("../AnimationPlayer")
+parameters/blend_position = Vector2(0, 0)
+
+[node name="EnemyGun" parent="." instance=ExtResource("3_1h57y")]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true

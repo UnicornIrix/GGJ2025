@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0lqrxraktaya"]
+
+[ext_resource type="Script" path="res://Assets/Gun/Gun.cs" id="1_313iw"]
+[ext_resource type="PackedScene" uid="uid://dpid4bpnkc1hn" path="res://Assets/Bullet/EnemyBullet.tscn" id="2_up8u6"]
+
+[node name="EnemyGun" type="Node2D" node_paths=PackedStringArray("bulletGenPoint")]
+script = ExtResource("1_313iw")
+bullet = ExtResource("2_up8u6")
+bulletGenPoint = NodePath("BulletGenerationMarker")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="BulletGenerationMarker" type="Marker2D" parent="."]
