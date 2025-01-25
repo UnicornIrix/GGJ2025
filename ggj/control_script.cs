@@ -16,7 +16,7 @@ public partial class control_script : Control
 	
 	public void start_game(){
 
-		PackedScene scenaprova = ResourceLoader.Load<PackedScene>("res://scenaprova.tscn").Instantiate();
-		GetTree().Root.AddChild(scenaprova);
+		//PackedScene scenaprova = ResourceLoader.Load<PackedScene>("res://scenaprova.tscn").Instantiate();
+		//GetTree().Root.AddChild(scenaprova);
 	}
 }
