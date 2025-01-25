@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b8rkaqsio0tvb"]
+[gd_scene load_steps=11 format=3 uid="uid://b8rkaqsio0tvb"]
 
 [ext_resource type="Script" path="res://Assets/Enemy/Enemy.cs" id="1_ekytm"]
 [ext_resource type="Texture2D" uid="uid://ddnol13543xqu" path="res://Assets/Enemy/sceriffo_1.png" id="2_s7rih"]
@@ -104,6 +104,18 @@ animation = &"Right"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5t3k1"]
 animation = &"Left"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_itf1i"]
+animation = &"Down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_npptn"]
+animation = &"Up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3fkyy"]
+animation = &"Right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5t3k1"]
+animation = &"Left"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_51v8l"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_itf1i")
 blend_point_0/pos = Vector2(0, 1)
@@ -152,7 +164,7 @@ parameters/blend_position = Vector2(0, 0)
 position = Vector2(0, -55)
 
 [node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.8
 one_shot = true
 
 [node name="AttackSubStateTimer" type="Timer" parent="."]
@@ -165,7 +177,12 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayerArea2D"]
 shape = SubResource("CircleShape2D_p5lpe")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(2.30534, 2.23159)
+
 [connection signal="timeout" from="ShootTimer" to="." method="ShootWaitTimeout"]
 [connection signal="timeout" from="AttackSubStateTimer" to="." method="AttackSubStateTimerTimeout"]
 [connection signal="body_entered" from="DetectPlayerArea2D" to="." method="Area2DBodyEntered"]
 [connection signal="body_exited" from="DetectPlayerArea2D" to="." method="Area2DBodyExited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="EnteredCameraViewport"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="ExitedCameraViewport"]

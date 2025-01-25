@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://fwfgbjvgmhpv"]
+
+[ext_resource type="Script" path="res://Assets/SpawnPoints/SpawnPointHandler.cs" id="1_cakvf"]
+[ext_resource type="PackedScene" uid="uid://xrgfhpyh4re7" path="res://Assets/SpawnPoints/Spawn.tscn" id="2_mrvfq"]
+
+[node name="SpawnPointHandler" type="Node2D"]
+script = ExtResource("1_cakvf")
+spawnScene = ExtResource("2_mrvfq")
+mapSize = Vector2(1920, 1080)
+spawnsNum = 4
+hasMaxEnemyNum = true
+maxEnemyTotalNum = 100
+maxEnemyCurrentNumAlive = 5
