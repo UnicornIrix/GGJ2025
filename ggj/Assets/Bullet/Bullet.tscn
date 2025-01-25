@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://ddbhwk7ae5oi8"]
 
-[ext_resource type="Texture2D" uid="uid://fueikpkpt8lh" path="res://icon.svg" id="1_3mnvu"]
 [ext_resource type="Script" path="res://Assets/Bullet/Bullet.cs" id="1_nnvkm"]
+[ext_resource type="Texture2D" uid="uid://b0lbw06g6mcd7" path="res://Assets/Bullet/Player_bullet.png" id="2_xe747"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i546n"]
-size = Vector2(38, 38)
+[sub_resource type="CircleShape2D" id="CircleShape2D_gychg"]
+radius = 13.0384
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pgi8o"]
-size = Vector2(40, 40)
+[sub_resource type="CircleShape2D" id="CircleShape2D_50c35"]
+radius = 15.0333
 
 [node name="Bullet" type="RigidBody2D"]
 collision_layer = 128
@@ -18,16 +18,16 @@ metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.3, 0.3)
-texture = ExtResource("1_3mnvu")
+texture = ExtResource("2_xe747")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_i546n")
+shape = SubResource("CircleShape2D_gychg")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_pgi8o")
+shape = SubResource("CircleShape2D_50c35")
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
