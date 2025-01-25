@@ -19,5 +19,4 @@ position = Vector2(1817, 2386)
 z_index = -1
 offset_right = 5760.0
 offset_bottom = 3240.0
-scale = Vector2(2, 2)
 texture = ExtResource("4_1xykk")
