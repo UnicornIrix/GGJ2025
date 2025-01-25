@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8rkaqsio0tvb"]
+[gd_scene load_steps=7 format=3 uid="uid://b8rkaqsio0tvb"]
 
 [ext_resource type="Texture2D" uid="uid://fueikpkpt8lh" path="res://icon.svg" id="1_drb5h"]
 [ext_resource type="Script" path="res://Assets/Enemy/Enemy.cs" id="1_ekytm"]
@@ -9,9 +9,12 @@ size = Vector2(130, 128)
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_51v8l"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_p5lpe"]
+radius = 1107.0
+
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("animTree", "gun", "timeBetweenShootTimer")]
 collision_layer = 8
-collision_mask = 5
+collision_mask = 133
 script = ExtResource("1_ekytm")
 animTree = NodePath("AnimationTree")
 gun = NodePath("EnemyGun")
@@ -33,7 +36,19 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/blend_position = Vector2(0, 0)
 
 [node name="EnemyGun" parent="." instance=ExtResource("3_1h57y")]
+position = Vector2(59, -3)
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
+
+[node name="DetectPlayerArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayerArea2D"]
+shape = SubResource("CircleShape2D_p5lpe")
+
+[connection signal="timeout" from="Timer" to="." method="ShootWaitTimeout"]
+[connection signal="body_entered" from="DetectPlayerArea2D" to="." method="Area2DBodyEntered"]
+[connection signal="body_exited" from="DetectPlayerArea2D" to="." method="Area2DBodyExited"]

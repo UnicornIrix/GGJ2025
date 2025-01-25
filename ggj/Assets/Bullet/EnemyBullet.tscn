@@ -7,8 +7,9 @@
 size = Vector2(38, 38)
 
 [node name="EnemyBullet" type="RigidBody2D"]
-collision_layer = 16
+collision_layer = 272
 collision_mask = 3
+gravity_scale = 0.0
 script = ExtResource("1_wuepc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

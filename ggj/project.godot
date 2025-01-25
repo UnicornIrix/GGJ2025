@@ -68,3 +68,5 @@ shoot={
 2d_physics/layer_5="EnemyHitbox"
 2d_physics/layer_6="Collectibles"
 2d_physics/layer_7="CollectiblesHitbox"
+2d_physics/layer_8="BulletPlayer"
+2d_physics/layer_9="BulletEnemy"
