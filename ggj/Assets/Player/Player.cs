@@ -73,7 +73,7 @@ public partial class Player : CharacterBody2D
 	public void Dead()
 	{
 		// TODO: Game Over
-		GetTree().ReloadCurrentScene();
+		GetTree().CallDeferred("reload_current_scene");
 	}
 	
 }

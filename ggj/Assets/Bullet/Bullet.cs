@@ -8,23 +8,21 @@ public partial class Bullet : RigidBody2D
 	private float speed = 800.0f;
 
 
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-
-    public override void _PhysicsProcess(double delta)
-    {
-
-    }
-
     public void ChangeDir(Vector2 dir){
 		LinearVelocity = dir * speed;
 	}
 
-	// distruzione proiettile
-	public void OnTimeDestroy(){
+	public void OnBodyEntered(Node2D body)
+	{
+		if(body is Player)
+		{
+			((Player)body).Hitted();
+		}
+		else if(body is Enemy){
+			((Enemy)body).Hitted();
+		}
+
 		QueueFree();
 	}
+
 }

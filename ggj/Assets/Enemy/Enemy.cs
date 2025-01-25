@@ -200,6 +200,7 @@ public partial class Enemy : CharacterBody2D
 
 	public void Dead()
 	{
+		QueueFree();
 		// TODO: Kill enemy
 		
 	}
