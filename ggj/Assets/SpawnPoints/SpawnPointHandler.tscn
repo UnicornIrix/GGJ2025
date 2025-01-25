@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://fwfgbjvgmhpv"]
+
+[ext_resource type="Script" path="res://Assets/SpawnPoints/SpawnPointHandler.cs" id="1_cakvf"]
+
+[node name="SpawnPointHandler" type="Node2D"]
+script = ExtResource("1_cakvf")
