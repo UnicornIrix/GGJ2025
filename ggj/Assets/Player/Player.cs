@@ -12,7 +12,7 @@ public partial class Player : CharacterBody2D
 	[Export]
 	Timer timeBetweenShootTimer;
 
-	private const float Speed = 300.0f;
+	private const float Speed = 450.0f;
 
 	[Export]
 	private int health = 1;
