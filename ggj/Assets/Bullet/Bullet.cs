@@ -22,4 +22,9 @@ public partial class Bullet : RigidBody2D
     public void ChangeDir(Vector2 dir){
 		LinearVelocity = dir * speed;
 	}
+
+	// distruzione proiettile
+	public void OnTimeDestroy(){
+		QueueFree();
+	}
 }
