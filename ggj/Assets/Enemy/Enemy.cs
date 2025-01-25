@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 public partial class Enemy : CharacterBody2D
 {
@@ -12,8 +13,12 @@ public partial class Enemy : CharacterBody2D
 
 	[Export]
 	Timer timeBetweenShootTimer;
+	
+	[Export]
+	Timer attackSubStateTimer;
 
-	private const float Speed = 300.0f;
+	[Export]
+	private float Speed = 200.0f;
 
 	[Export]
 	private int health = 1;
@@ -21,9 +26,8 @@ public partial class Enemy : CharacterBody2D
 	[Export]
 	private float shootRange = 600;
 
-	Vector2 lastDir = Vector2.Right;
-
 	bool canShoot = true;
+	bool canAttackSubState = true;
 
 	Player playerTarget;
 
@@ -33,7 +37,17 @@ public partial class Enemy : CharacterBody2D
 		Attack
 	}
 
-	States state = States.Attack;
+	States state = States.Normal;
+
+	enum AttackStates
+	{
+		ShootAttack,
+		MoveAttack
+	}
+
+	AttackStates attackState; 
+
+	Vector2 attackMoveDir;
 
     public override void _PhysicsProcess(double delta)
 	{
@@ -45,8 +59,10 @@ public partial class Enemy : CharacterBody2D
 				ChaseState();
 				break;
 			case States.Attack:
-				AttackState();
+			{
+				AttackStateAsync();
 				break;
+			}
 		}
 	}
 
@@ -56,9 +72,7 @@ public partial class Enemy : CharacterBody2D
 		if (direction != Vector2.Zero)
 		{
 			velocity = direction * Speed;
-			lastDir = direction;
-			if(Mathf.Abs(direction.X) > 0 && Mathf.Abs(direction.Y) > 0)
-				lastDir.X = 0;
+		
 		}
 		else
 		{
@@ -80,35 +94,82 @@ public partial class Enemy : CharacterBody2D
 
 		if(this.GlobalPosition.DistanceTo(playerTarget.GlobalPosition) <= shootRange)
 		{
-			state = States.Attack;
+			if(this.GlobalPosition.DistanceTo(playerTarget.GlobalPosition) <= shootRange)
+				ChangeState(States.Attack);
 		}
 
-		// TODO: Move(to player direction)
+		Move(this.GlobalPosition.DirectionTo(playerTarget.GlobalPosition));
 	}
 
-	public void AttackState(){
+	public async void AttackStateAsync(){
+		if(playerTarget == null)
+		{
+			return;
+		}
+
+		if(this.GlobalPosition.DistanceTo(playerTarget.GlobalPosition) > shootRange)
+		{
+			await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
+			if(this.GlobalPosition.DistanceTo(playerTarget.GlobalPosition) > shootRange)
+				ChangeState(States.Chase);
+		}
+
+		if(canAttackSubState)
+		{
+			Random random = new Random();
+
+			canAttackSubState = false;
+			attackSubStateTimer.Start();
+
+			if(random.NextDouble() < 0.5)
+			{
+				attackState = AttackStates.MoveAttack;
+				double randomN = random.NextDouble();
+
+				if(randomN < 0.25)
+					attackMoveDir = Vector2.Left;
+				else if(randomN < 0.5)
+					attackMoveDir = Vector2.Right;
+				else if(randomN < 0.75)
+					attackMoveDir = Vector2.Up;
+				else
+					attackMoveDir = Vector2.Down;
+			}
+			else
+				attackState = AttackStates.ShootAttack;
+		}
+		else{
+			if(attackState == AttackStates.MoveAttack)
+				AttackMoveState();
+		}
+		
+		if(attackState == AttackStates.ShootAttack)
+			AttackShootState();
+	}
+
+	public void AttackShootState(){
 		if (playerTarget == null)
 			return;
 
-		Random random = new Random();
-
-		if(random.NextDouble() > 0.2){
-			if(canShoot)
-			{
-				GD.Print(state);
-				gun.Shoot(this.GlobalPosition.DirectionTo(playerTarget.GlobalPosition));
-				canShoot = false;
-				timeBetweenShootTimer.Start();
-			}
-		}
-		else
+		if(canShoot)
 		{
-			
+			gun.Shoot(this.GlobalPosition.DirectionTo(playerTarget.GlobalPosition));
+			canShoot = false;
+			timeBetweenShootTimer.Start();
 		}
+	}
+
+	public void AttackMoveState(){
+
+		Move(attackMoveDir);
 	}
 
 	public void ShootWaitTimeout(){
 		canShoot = true;
+	}
+
+	public void AttackSubStateTimerTimeout(){
+		canAttackSubState = true;
 	}
 
 	public void Hitted(){
@@ -125,7 +186,7 @@ public partial class Enemy : CharacterBody2D
 		if(body is Player)
 		{
 			playerTarget = (Player)body;
-			state = States.Chase;
+			ChangeState(States.Chase);
 		}
 	}
 
@@ -133,7 +194,7 @@ public partial class Enemy : CharacterBody2D
 		if(body is Player)
 		{
 			playerTarget = null;
-			state = States.Normal;
+			ChangeState(States.Normal);
 		}
 	}
 
@@ -143,4 +204,8 @@ public partial class Enemy : CharacterBody2D
 		
 	}
 	
+	private void ChangeState(States newState){
+		state = newState;
+		// await
+	}
 }
