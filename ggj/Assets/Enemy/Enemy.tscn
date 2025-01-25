@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b8rkaqsio0tvb"]
+[gd_scene load_steps=11 format=3 uid="uid://b8rkaqsio0tvb"]
 
 [ext_resource type="Texture2D" uid="uid://fueikpkpt8lh" path="res://icon.svg" id="1_drb5h"]
 [ext_resource type="Script" path="res://Assets/Enemy/Enemy.cs" id="1_ekytm"]
@@ -7,7 +7,28 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2ft2"]
 size = Vector2(130, 128)
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_itf1i"]
+animation = &"Down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_npptn"]
+animation = &"Up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3fkyy"]
+animation = &"Right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5t3k1"]
+animation = &"Left"
+
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_51v8l"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_itf1i")
+blend_point_0/pos = Vector2(0, 1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_npptn")
+blend_point_1/pos = Vector2(0, -1)
+blend_point_2/node = SubResource("AnimationNodeAnimation_3fkyy")
+blend_point_2/pos = Vector2(0.9, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_5t3k1")
+blend_point_3/pos = Vector2(-0.9, 0)
+blend_mode = 1
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p5lpe"]
 radius = 1107.0

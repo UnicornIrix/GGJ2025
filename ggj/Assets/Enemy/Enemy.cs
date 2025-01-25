@@ -51,9 +51,25 @@ public partial class Enemy : CharacterBody2D
 
     bool isOnCamera;
 
+	SpawnPointHandler spawnPointHandler;
+
+	public SpawnPointHandler SpawnPointHandler{
+		get{
+			return spawnPointHandler;
+		}
+		set{
+			spawnPointHandler = value;
+		}
+	}
+
+    public override void _Ready()
+    {
+        spawnPointHandler?.AddCurrentAliveEnemy();
+    }
 
     public override void _PhysicsProcess(double delta)
 	{
+	
 		switch(state){
 			case States.Normal:
 				NormalState();
@@ -212,8 +228,9 @@ public partial class Enemy : CharacterBody2D
 
 	public void Dead()
 	{
+
+		spawnPointHandler?.SubtractCurrentAliveENemy();
 		QueueFree();
-		// TODO: Kill enemy
 		
 	}
 	
