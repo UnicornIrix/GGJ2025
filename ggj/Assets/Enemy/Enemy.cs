@@ -49,6 +49,8 @@ public partial class Enemy : CharacterBody2D
 	AttackStates attackState;
 
 	Vector2 attackMoveDir;
+	
+	Vector2 lastDir;
 
 	bool isOnCamera;
 
@@ -97,7 +99,7 @@ public partial class Enemy : CharacterBody2D
 		if (direction != Vector2.Zero)
 		{
 			velocity = direction * Speed;
-
+			lastDir = direction;
 		}
 		else
 		{
@@ -105,7 +107,7 @@ public partial class Enemy : CharacterBody2D
 		}
 
 		Velocity = velocity;
-		animTree.Set("parameters/blend_position", velocity);
+		animTree.Set("parameters/blend_position", lastDir);
 		MoveAndSlide();
 	}
 

@@ -14,6 +14,8 @@ public partial class Bullet : RigidBody2D
 
 	public void OnBodyEntered(Node2D body)
 	{
+		LinearVelocity = Vector2.Zero;
+
 		if(body is Player)
 		{
 			((Player)body).Hitted();
