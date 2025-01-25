@@ -61,13 +61,11 @@ public partial class Player : CharacterBody2D
 	}
 
 	public void Hitted(){
-		if(health <= 0)
-		{
-			Dead();
-			return;
-		}
-
 		health -= 1;
+
+		if(health <= 0)
+			Dead();
+
 	}
 
 	public void Dead()
