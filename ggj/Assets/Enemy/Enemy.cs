@@ -49,6 +49,9 @@ public partial class Enemy : CharacterBody2D
 
 	Vector2 attackMoveDir;
 
+    bool isOnCamera;
+
+
     public override void _PhysicsProcess(double delta)
 	{
 		switch(state){
@@ -92,10 +95,12 @@ public partial class Enemy : CharacterBody2D
 		if(playerTarget == null)
 			return;
 
-		if(this.GlobalPosition.DistanceTo(playerTarget.GlobalPosition) <= shootRange)
+		if(isOnCamera)
 		{
 			if(this.GlobalPosition.DistanceTo(playerTarget.GlobalPosition) <= shootRange)
-				ChangeState(States.Attack);
+			{
+					ChangeState(States.Attack);
+			}
 		}
 
 		Move(this.GlobalPosition.DirectionTo(playerTarget.GlobalPosition));
@@ -107,7 +112,7 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 
-		if(this.GlobalPosition.DistanceTo(playerTarget.GlobalPosition) > shootRange)
+		if(!isOnCamera || this.GlobalPosition.DistanceTo(playerTarget.GlobalPosition) > shootRange)
 		{
 			await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
 			if(this.GlobalPosition.DistanceTo(playerTarget.GlobalPosition) > shootRange)
@@ -143,6 +148,7 @@ public partial class Enemy : CharacterBody2D
 				AttackMoveState();
 		}
 		
+
 		if(attackState == AttackStates.ShootAttack)
 			AttackShootState();
 	}
@@ -194,6 +200,14 @@ public partial class Enemy : CharacterBody2D
 			playerTarget = null;
 			ChangeState(States.Normal);
 		}
+	}
+
+	public void EnteredCameraViewport(){
+		isOnCamera = true;
+	}
+
+	public void ExitedCameraViewport(){
+		isOnCamera = false;
 	}
 
 	public void Dead()

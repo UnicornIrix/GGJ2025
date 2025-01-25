@@ -54,7 +54,12 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayerArea2D"]
 shape = SubResource("CircleShape2D_p5lpe")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(2.30534, 2.23159)
+
 [connection signal="timeout" from="ShootTimer" to="." method="ShootWaitTimeout"]
 [connection signal="timeout" from="AttackSubStateTimer" to="." method="AttackSubStateTimerTimeout"]
 [connection signal="body_entered" from="DetectPlayerArea2D" to="." method="Area2DBodyEntered"]
 [connection signal="body_exited" from="DetectPlayerArea2D" to="." method="Area2DBodyExited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="EnteredCameraViewport"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="ExitedCameraViewport"]
