@@ -1,30 +1,18 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwnvvkbovdx40"]
+[gd_scene load_steps=4 format=3 uid="uid://bwnvvkbovdx40"]
 
 [ext_resource type="PackedScene" uid="uid://ds3p30hrb3g0p" path="res://Assets/Player/Player.tscn" id="1_x2p1c"]
-[ext_resource type="PackedScene" uid="uid://b8rkaqsio0tvb" path="res://Assets/Enemy/Enemy.tscn" id="2_utfqa"]
 [ext_resource type="PackedScene" uid="uid://fwfgbjvgmhpv" path="res://Assets/SpawnPoints/SpawnPointHandler.tscn" id="3_gub82"]
-[ext_resource type="Texture2D" uid="uid://bp7orw5qox1s6" path="res://env_1.png" id="4_1xykk"]
-[ext_resource type="PackedScene" uid="uid://ddbhwk7ae5oi8" path="res://Assets/Bullet/Bullet.tscn" id="5_w5yuq"]
-[ext_resource type="PackedScene" uid="uid://dpid4bpnkc1hn" path="res://Assets/Bullet/EnemyBullet.tscn" id="6_2r6wc"]
+[ext_resource type="Texture2D" uid="uid://cnbg2k2u5cyhf" path="res://env_1.png" id="4_1xykk"]
 
 [node name="World" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_x2p1c")]
 position = Vector2(2272, 2371)
 
-[node name="Enemy" parent="." instance=ExtResource("2_utfqa")]
-position = Vector2(1817, 2386)
-
 [node name="SpawnPointHandler" parent="." instance=ExtResource("3_gub82")]
 
-[node name="TextureRect" type="TextureRect" parent="."]
-z_index = -1
-offset_right = 5760.0
-offset_bottom = 3240.0
+[node name="TextureRect" type="Sprite2D" parent="."]
+z_index = -2
 texture = ExtResource("4_1xykk")
-
-[node name="Bullet" parent="." instance=ExtResource("5_w5yuq")]
-position = Vector2(2387, 2445)
-
-[node name="EnemyBullet" parent="." instance=ExtResource("6_2r6wc")]
-position = Vector2(2326, 2340)
+centered = false

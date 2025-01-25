@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnbg2k2u5cyhf"
-path="res://.godot/imported/env_1.png-d2eb2d07710ea024735efba46cc97822.ctex"
+uid="uid://bwtyuahmocgow"
+path="res://.godot/imported/bobi_front.png-4771f447fe1167398643473a5150b714.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://env_1.png"
-dest_files=["res://.godot/imported/env_1.png-d2eb2d07710ea024735efba46cc97822.ctex"]
+source_file="res://Assets/Player/bobi_front.png"
+dest_files=["res://.godot/imported/bobi_front.png-4771f447fe1167398643473a5150b714.ctex"]
 
 [params]
 
