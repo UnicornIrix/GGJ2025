@@ -1,5 +1,10 @@
-[gd_scene format=3 uid="uid://xrgfhpyh4re7"]
+[gd_scene load_steps=3 format=3 uid="uid://xrgfhpyh4re7"]
+
+[ext_resource type="Script" path="res://Assets/SpawnPoints/Spawn.cs" id="1_3hk0e"]
+[ext_resource type="PackedScene" uid="uid://b8rkaqsio0tvb" path="res://Assets/Enemy/Enemy.tscn" id="2_um50c"]
 
 [node name="Spawn" type="Node2D"]
+script = ExtResource("1_3hk0e")
+enemyScene = ExtResource("2_um50c")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

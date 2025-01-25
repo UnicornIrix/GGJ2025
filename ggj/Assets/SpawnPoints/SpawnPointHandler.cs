@@ -21,10 +21,10 @@ public partial class SpawnPointHandler : Node2D
 	int maxEnemyTotalNum;
 
 	[Export]
-	int maxEnemyCurrentNum;
+	int maxEnemyCurrentNumAlive;
 	
 	
-	int spawnedEnemies=0;
+	int totalSpawnedEnemies=0;
 
 	int enemyCurrentNum=0;
 
@@ -34,13 +34,15 @@ public partial class SpawnPointHandler : Node2D
 	
 	public override void _Ready()
 	{
+
+		// Spawn spawns with distance of 500
 		for(int i=0; i < spawnsNum; i++)
 		{
 			Vector2 randPos = new Vector2((float)random.NextDouble() * mapSize.X, (float)random.NextDouble() * mapSize.Y);
 
 			if(i > 0)
 			{
-				while(randPos.DistanceTo(spawns[i-1].Position) > 500)
+				while(randPos.DistanceTo(spawns[i-1].Position) < 50)
 				{
 					randPos = new Vector2((float)random.NextDouble() * mapSize.X, (float)random.NextDouble() * mapSize.Y);
 				}
@@ -55,13 +57,25 @@ public partial class SpawnPointHandler : Node2D
 
     public override void _Process(double delta)
     {
-        if(enemyCurrentNum < maxEnemyCurrentNum)
+        if(enemyCurrentNum < maxEnemyCurrentNumAlive)
 		{
-			int spawnToUse = random.Next(0, spawns.Count);
+			if(!hasMaxEnemyNum)
+			{
+				if(totalSpawnedEnemies < maxEnemyTotalNum)
+				{
+					int spawnToUse = random.Next(0, spawns.Count);
 
-			((Spawn)spawns[spawnToUse]).CreateEnemy();
-			spawnedEnemies += 1; 
-			
+					((Spawn)spawns[spawnToUse]).CreateEnemy();
+					totalSpawnedEnemies += 1; 
+				}
+			}
+			else
+			{
+				int spawnToUse = random.Next(0, spawns.Count);
+
+				((Spawn)spawns[spawnToUse]).CreateEnemy();
+				totalSpawnedEnemies += 1; 
+			}
 		}
     }
 

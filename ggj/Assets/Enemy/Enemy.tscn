@@ -62,7 +62,7 @@ parameters/blend_position = Vector2(0, 0)
 position = Vector2(59, -3)
 
 [node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.8
 one_shot = true
 
 [node name="AttackSubStateTimer" type="Timer" parent="."]

@@ -272,4 +272,8 @@ position = Vector2(61, 3)
 wait_time = 0.4
 one_shot = true
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
 [connection signal="timeout" from="Timer" to="." method="ShootWaitTimeout"]

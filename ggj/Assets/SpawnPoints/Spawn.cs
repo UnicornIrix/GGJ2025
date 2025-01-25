@@ -13,7 +13,9 @@ public partial class Spawn : Node2D
 	{
 		Node2D enemySceneInstance = (Node2D)enemyScene.Instantiate();
 		enemySceneInstance.Position = Position;
-		()enemySceneInstance.
+		if(GetParent() is SpawnPointHandler handler)
+			((Enemy)enemySceneInstance).SpawnPointHandler = handler;
+
 		AddChild(enemySceneInstance);
 	}
 
