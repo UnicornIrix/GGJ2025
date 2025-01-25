@@ -12,7 +12,10 @@ public partial class Gun : Node2D
 
 
 	public void Shoot(){
-		var bulletInstance = bullet.Instantiate();
-		 GetTree().Root.GetNode("/world").AddChild(bulletInstance);
+		Node2D bulletInstance = (Node2D)bullet.Instantiate();
+
+		bulletInstance.Position = bulletGenPoint.GlobalPosition;
+
+		GetTree().Root.GetNode("/root/World").AddChild(bulletInstance);
 	}
 }

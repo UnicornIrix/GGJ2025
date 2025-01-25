@@ -3,13 +3,23 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
+	[Export]
+	Gun gun;
+
 	private const float Speed = 300.0f;
 
 	[Export]
 	private int health = 1;
 
+    public override void _Process(double delta)
+    {
+		if(Input.IsActionPressed("shoot"))
+		{
+			gun.Shoot();
+		}
+    }
 
-	public override void _PhysicsProcess(double delta)
+    public override void _PhysicsProcess(double delta)
 	{
 		Vector2 velocity = Velocity;
 
@@ -29,17 +39,17 @@ public partial class Player : CharacterBody2D
 		MoveAndSlide();
 	}
 
-	public void hitted(){
+	public void Hitted(){
 		if(health <= 0)
 		{
-			dead();
+			Dead();
 			return;
 		}
 
 		health -= 1;
 	}
 
-	public void dead()
+	public void Dead()
 	{
 		GetTree().ReloadCurrentScene();
 	}
