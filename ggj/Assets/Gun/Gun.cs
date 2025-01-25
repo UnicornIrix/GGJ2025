@@ -11,10 +11,11 @@ public partial class Gun : Node2D
 	Marker2D bulletGenPoint;
 
 
-	public void Shoot(){
+	public void Shoot(Vector2 shootDir){
 		Node2D bulletInstance = (Node2D)bullet.Instantiate();
 
 		bulletInstance.Position = bulletGenPoint.GlobalPosition;
+		((Bullet)bulletInstance).ChangeDir(shootDir);
 
 		GetTree().Root.GetNode("/root/World").AddChild(bulletInstance);
 	}

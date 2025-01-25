@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddbhwk7ae5oi8"]
+[gd_scene load_steps=4 format=3 uid="uid://ddbhwk7ae5oi8"]
 
 [ext_resource type="Texture2D" uid="uid://fueikpkpt8lh" path="res://icon.svg" id="1_3mnvu"]
+[ext_resource type="Script" path="res://Assets/Bullet/Bullet.cs" id="1_nnvkm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i546n"]
 size = Vector2(38, 38)
@@ -9,6 +10,8 @@ size = Vector2(38, 38)
 collision_layer = 4
 collision_mask = 9
 gravity_scale = 0.0
+script = ExtResource("1_nnvkm")
+speed = 650.0
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

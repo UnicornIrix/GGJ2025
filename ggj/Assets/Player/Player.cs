@@ -1,21 +1,36 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public partial class Player : CharacterBody2D
 {
 	[Export]
+	AnimationTree animTree;
+
+	[Export]
 	Gun gun;
+
+	[Export]
+	Timer timeBetweenShootTimer;
 
 	private const float Speed = 300.0f;
 
 	[Export]
 	private int health = 1;
 
+	Vector2 lastDir = Vector2.Right;
+
+	bool canShoot = true;
+
     public override void _Process(double delta)
     {
 		if(Input.IsActionPressed("shoot"))
 		{
-			gun.Shoot();
+			if(canShoot){
+				gun.Shoot(lastDir);
+				canShoot = false;
+				timeBetweenShootTimer.Start();
+			}
 		}
     }
 
@@ -23,12 +38,14 @@ public partial class Player : CharacterBody2D
 	{
 		Vector2 velocity = Velocity;
 
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
+		
 		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down").Normalized();
 		if (direction != Vector2.Zero)
 		{
 			velocity = direction * Speed;
+			lastDir = direction;
+			if(Mathf.Abs(direction.X) > 0 && Mathf.Abs(direction.Y) > 0)
+				lastDir.X = 0;
 		}
 		else
 		{
@@ -36,7 +53,12 @@ public partial class Player : CharacterBody2D
 		}
 
 		Velocity = velocity;
+		animTree.Set("parameters/blend_position", velocity);
 		MoveAndSlide();
+	}
+
+	public void ShootWaitTimeout(){
+		canShoot = true;
 	}
 
 	public void Hitted(){
@@ -51,6 +73,8 @@ public partial class Player : CharacterBody2D
 
 	public void Dead()
 	{
+		// TODO: Game Over
 		GetTree().ReloadCurrentScene();
 	}
+	
 }
