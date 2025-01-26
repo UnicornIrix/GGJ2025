@@ -12,11 +12,11 @@ public partial class Spawn : Node2D
     public void CreateEnemy()
 	{
 		Node2D enemySceneInstance = (Node2D)enemyScene.Instantiate();
-		enemySceneInstance.Position = Position;
-		if(GetParent() is SpawnPointHandler handler)
-			((Enemy)enemySceneInstance).SpawnPointHandler = handler;
+		enemySceneInstance.GlobalPosition = GlobalPosition;
+		
+		((Enemy)enemySceneInstance).SpawnPointHandler = (SpawnPointHandler)GetParent();
 
-		AddChild(enemySceneInstance);
+		GetTree().Root.GetNode("/root/World").AddChild(enemySceneInstance);
 	}
 
 	public void EnteredOnScreen()
@@ -28,4 +28,5 @@ public partial class Spawn : Node2D
 	{
 		isOnScreen = false;
 	}
+
 }

@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://cqh5fek8ej1qs"]
+
+[ext_resource type="Script" path="res://Assets/Cutscene/VideoStreamPlayerController.cs" id="1_r4al5"]
+[ext_resource type="VideoStream" path="res://Assets/Cutscene/cutscene_1_.ogv" id="1_s47st"]
+[ext_resource type="AudioStream" uid="uid://di37e2p1d7w6u" path="res://Assets/SFX/gunshot_sound.mp3" id="3_ykmf2"]
+[ext_resource type="Texture2D" uid="uid://dhdpfl4wy0k3d" path="res://Assets/Cutscene/Scene_4.png" id="4_qqcdg"]
+
+[node name="VideoStreamPlayer" type="Node2D" node_paths=PackedStringArray("videoStreamPlayer", "control", "audioStream")]
+script = ExtResource("1_r4al5")
+videoStreamPlayer = NodePath("VideoStreamPlayer")
+control = NodePath("Control")
+audioStream = NodePath("AudioStreamPlayer")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_right = 1920.0
+offset_bottom = 1088.0
+stream = ExtResource("1_s47st")
+autoplay = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_ykmf2")
+volume_db = 24.0
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1088.0
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_qqcdg")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -266.0
+offset_top = -188.0
+offset_right = 266.0
+offset_bottom = -88.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[center] press space to shoot him [center]"
+
+[connection signal="finished" from="VideoStreamPlayer" to="." method="OnCutsceneFinished"]
+[connection signal="finished" from="AudioStreamPlayer" to="." method="OnAudioFinished"]

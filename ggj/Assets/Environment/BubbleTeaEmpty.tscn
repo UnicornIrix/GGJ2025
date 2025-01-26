@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://inhw40kook77"]
+
+[ext_resource type="Texture2D" uid="uid://hbakdotxp7o3" path="res://Assets/Environment/bubbletea_empty.png" id="1_wy5xk"]
+
+[node name="BubbleTeaEmpty" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_wy5xk")
