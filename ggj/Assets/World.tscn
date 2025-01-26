@@ -1,8 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://bwnvvkbovdx40"]
+[gd_scene load_steps=23 format=3 uid="uid://bwnvvkbovdx40"]
 
 [ext_resource type="PackedScene" uid="uid://ds3p30hrb3g0p" path="res://Assets/Player/Player.tscn" id="1_x2p1c"]
+[ext_resource type="PackedScene" uid="uid://273kuyssjtqs" path="res://Assets/Environment/Bancone.tscn" id="2_f77ch"]
 [ext_resource type="Texture2D" uid="uid://bsnyqsc3l01no" path="res://Assets/BG/env_3.png" id="3_44ol4"]
 [ext_resource type="PackedScene" uid="uid://fwfgbjvgmhpv" path="res://Assets/SpawnPoints/SpawnPointHandler.tscn" id="3_gub82"]
+[ext_resource type="AudioStream" uid="uid://bkxkmpgcqnf67" path="res://Assets/SFX/background_music.mp3" id="4_jqsgx"]
+[ext_resource type="PackedScene" uid="uid://bnorf5yue1bsg" path="res://Assets/Environment/Chair.tscn" id="5_bkrow"]
+[ext_resource type="PackedScene" uid="uid://vv0kt07isl5g" path="res://Assets/Environment/Table.tscn" id="6_mb6w3"]
+[ext_resource type="PackedScene" uid="uid://inhw40kook77" path="res://Assets/Environment/BubbleTeaEmpty.tscn" id="7_gfd2p"]
+[ext_resource type="PackedScene" uid="uid://5cd3pxeusrsp" path="res://Assets/Environment/Barile.tscn" id="7_hg0lk"]
+[ext_resource type="PackedScene" uid="uid://d360focgu5ar6" path="res://Assets/Environment/BubbleTeaDropped.tscn" id="9_3c73p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r6f4x"]
 size = Vector2(5760, 362.158)
@@ -41,6 +48,7 @@ size = Vector2(496, 328)
 size = Vector2(472, 424)
 
 [node name="World" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Walls" type="StaticBody2D" parent="." groups=["Walls"]]
 z_index = -3
@@ -99,6 +107,7 @@ position = Vector2(240, 1384)
 shape = SubResource("RectangleShape2D_8mjqb")
 
 [node name="Player" parent="." instance=ExtResource("1_x2p1c")]
+z_index = 0
 y_sort_enabled = true
 position = Vector2(1768, 2488)
 
@@ -114,3 +123,182 @@ spawnsNum = 8
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(3144, 2848)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jqsgx")
+volume_db = -15.0
+autoplay = true
+parameters/looping = true
+
+[node name="Environment" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Chair" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(2928, 2624)
+
+[node name="Chair4" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(816, 2600)
+
+[node name="Chair3" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(1136, 2080)
+
+[node name="Chair9" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(4520, 1184)
+
+[node name="Chair10" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(2864, 848)
+
+[node name="Chair7" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(2632, 2096)
+
+[node name="Chair2" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(808, 2072)
+scale = Vector2(-1, 1)
+
+[node name="Chair8" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(2360, 2096)
+scale = Vector2(-1, 1)
+
+[node name="Chair11" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(2584, 880)
+scale = Vector2(-1, 1)
+
+[node name="Chair13" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(4688, 1256)
+
+[node name="Chair14" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(4344, 1248)
+scale = Vector2(-1, 1)
+
+[node name="Chair15" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(5248, 2064)
+
+[node name="Chair16" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(4968, 2080)
+scale = Vector2(-1, 1)
+
+[node name="Chair12" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(800, 840)
+scale = Vector2(-1, 1)
+
+[node name="Chair5" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(504, 2632)
+scale = Vector2(-1, 1)
+
+[node name="Chair17" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(664, 2560)
+scale = Vector2(-1, 1)
+
+[node name="Chair6" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(2696, 2640)
+scale = Vector2(-1, 1)
+
+[node name="Barile" parent="Environment" instance=ExtResource("7_hg0lk")]
+position = Vector2(224, 1640)
+
+[node name="Barile3" parent="Environment" instance=ExtResource("7_hg0lk")]
+position = Vector2(328, 416)
+
+[node name="Barile4" parent="Environment" instance=ExtResource("7_hg0lk")]
+position = Vector2(3360, 384)
+
+[node name="Barile5" parent="Environment" instance=ExtResource("7_hg0lk")]
+position = Vector2(3216, 392)
+
+[node name="Barile8" parent="Environment" instance=ExtResource("7_hg0lk")]
+position = Vector2(5624, 648)
+
+[node name="Barile7" parent="Environment" instance=ExtResource("7_hg0lk")]
+position = Vector2(4024, 704)
+
+[node name="Barile6" parent="Environment" instance=ExtResource("7_hg0lk")]
+position = Vector2(480, 416)
+
+[node name="Barile2" parent="Environment" instance=ExtResource("7_hg0lk")]
+position = Vector2(376, 1640)
+
+[node name="BubbleTeaEmpty" parent="Environment" instance=ExtResource("7_gfd2p")]
+position = Vector2(1216, 2176)
+
+[node name="BubbleTeaEmpty2" parent="Environment" instance=ExtResource("7_gfd2p")]
+position = Vector2(1616, 1680)
+
+[node name="Table" parent="Environment" instance=ExtResource("6_mb6w3")]
+position = Vector2(640, 2640)
+
+[node name="Table2" parent="Environment" instance=ExtResource("6_mb6w3")]
+position = Vector2(928, 2104)
+
+[node name="BubbleTeaDropped" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
+position = Vector2(3208, 376)
+
+[node name="BubbleTeaDropped2" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
+position = Vector2(-512, -1528)
+
+[node name="BubbleTeaDropped3" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
+position = Vector2(-232, 56)
+
+[node name="BubbleTeaDropped4" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
+position = Vector2(1232, -1512)
+
+[node name="BubbleTeaDropped5" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
+position = Vector2(1360, 160)
+
+[node name="BubbleTeaDropped6" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
+position = Vector2(4576, -1264)
+
+[node name="BubbleTeaDropped7" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
+position = Vector2(1856, 640)
+
+[node name="BubbleTeaDropped8" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
+position = Vector2(128, -1088)
+scale = Vector2(-1, -1)
+
+[node name="BubbleTeaDropped9" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
+position = Vector2(-672, -312)
+scale = Vector2(-1, -1)
+
+[node name="BubbleTeaDropped10" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
+position = Vector2(2248, -1568)
+scale = Vector2(-1, -1)
+
+[node name="BubbleTeaDropped11" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
+position = Vector2(-536, 808)
+scale = Vector2(-1, -1)
+
+[node name="BubbleTeaDropped12" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
+position = Vector2(3440, -360)
+scale = Vector2(-1, -1)
+
+[node name="BubbleTeaDropped13" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
+position = Vector2(2016, -208)
+scale = Vector2(-1, -1)
+
+[node name="BubbleTeaDropped14" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
+position = Vector2(4168, 128)
+scale = Vector2(-1, -1)
+
+[node name="Table5" parent="Environment" instance=ExtResource("6_mb6w3")]
+position = Vector2(1008, 872)
+
+[node name="Table6" parent="Environment" instance=ExtResource("6_mb6w3")]
+position = Vector2(2792, 896)
+
+[node name="Table7" parent="Environment" instance=ExtResource("6_mb6w3")]
+position = Vector2(4520, 1264)
+
+[node name="Table8" parent="Environment" instance=ExtResource("6_mb6w3")]
+position = Vector2(5136, 2104)
+
+[node name="Table4" parent="Environment" instance=ExtResource("6_mb6w3")]
+position = Vector2(2488, 2120)
+
+[node name="Table3" parent="Environment" instance=ExtResource("6_mb6w3")]
+position = Vector2(2816, 2672)
+
+[node name="Chair18" parent="Environment" instance=ExtResource("5_bkrow")]
+position = Vector2(1224, 888)
+rotation = 1.5708
+
+[node name="Bancone" parent="Environment" instance=ExtResource("2_f77ch")]
+position = Vector2(2008, 1856)

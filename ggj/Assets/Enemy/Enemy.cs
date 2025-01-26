@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 public partial class Enemy : CharacterBody2D
 {
 	[Export]
+	AudioStreamMP3 shootSound;
+
+	[Export]
 	AnimationTree animTree;
 
 	[Export]
@@ -76,6 +79,7 @@ public partial class Enemy : CharacterBody2D
 	{
 		spawnPointHandler?.AddCurrentAliveEnemy();
 		stateMachine = (AnimationNodeStateMachinePlayback)animTree.Get("parameters/playback");
+		gun.shootSound = shootSound;
 	}
 
 	public override void _PhysicsProcess(double delta)

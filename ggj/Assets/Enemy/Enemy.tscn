@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://b8rkaqsio0tvb"]
+[gd_scene load_steps=31 format=3 uid="uid://b8rkaqsio0tvb"]
 
 [ext_resource type="Script" path="res://Assets/Enemy/Enemy.cs" id="1_ekytm"]
 [ext_resource type="Texture2D" uid="uid://ddnol13543xqu" path="res://Assets/Enemy/sceriffo_1.png" id="2_0pyov"]
+[ext_resource type="AudioStream" uid="uid://di37e2p1d7w6u" path="res://Assets/SFX/gunshot_sound.mp3" id="2_hf5td"]
 [ext_resource type="Texture2D" uid="uid://vr1lviawsyvt" path="res://Assets/pop_A_1.0_1.png" id="2_k05hw"]
 [ext_resource type="PackedScene" uid="uid://d0lqrxraktaya" path="res://Assets/Gun/EnemyGun.tscn" id="3_1h57y"]
 [ext_resource type="Texture2D" uid="uid://bpfee44csc4xp" path="res://Assets/pop_A_1.0_2.png" id="3_snlac"]
@@ -9,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bkbwe62y04qgg" path="res://Assets/pop_A_1.0_3.png" id="5_35pov"]
 [ext_resource type="Texture2D" uid="uid://d3j78u1051mwa" path="res://Assets/pop_A_1.0_6.png" id="5_uurnt"]
 [ext_resource type="Texture2D" uid="uid://mjs3y8me2ixt" path="res://Assets/pop_A_1.0_5.png" id="7_hrxx7"]
+[ext_resource type="AudioStream" uid="uid://bhnkhbodnm4h3" path="res://Assets/SFX/bubble_die.mp3" id="9_ry8lp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3wh6d"]
 radius = 40.0
@@ -80,6 +82,21 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(0.5, 0.5)]
 }
+tracks/5/type = "audio"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AudioStreamPlayer2D")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("9_ry8lp")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/5/use_blend = true
 
 [sub_resource type="Animation" id="Animation_jvi84"]
 resource_name = "Down"
@@ -406,12 +423,13 @@ states/Idle/position = Vector2(391, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_efxqo"), "Idle", "Dead", SubResource("AnimationNodeStateMachineTransition_5527b"), "Dead", "End", SubResource("AnimationNodeStateMachineTransition_7aad3")]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p5lpe"]
-radius = 1107.0
+radius = 1200.0
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("animTree", "gun", "timeBetweenShootTimer", "attackSubStateTimer")]
 collision_layer = 8
 collision_mask = 141
 script = ExtResource("1_ekytm")
+shootSound = ExtResource("2_hf5td")
 animTree = NodePath("AnimationTree")
 gun = NodePath("EnemyGun")
 timeBetweenShootTimer = NodePath("ShootTimer")
@@ -457,6 +475,7 @@ shape = SubResource("CircleShape2D_p5lpe")
 scale = Vector2(2.30534, 2.23159)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = 5.0
 
 [connection signal="timeout" from="ShootTimer" to="." method="ShootWaitTimeout"]
 [connection signal="timeout" from="AttackSubStateTimer" to="." method="AttackSubStateTimerTimeout"]

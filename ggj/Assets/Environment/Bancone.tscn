@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://273kuyssjtqs"]
+
+[ext_resource type="Texture2D" uid="uid://mi5r8g76akm1" path="res://Assets/Environment/bancone_2_1,0.png" id="1_m2qih"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mt675"]
+size = Vector2(584, 76)
+
+[node name="Bancone" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -64)
+scale = Vector2(3, 3)
+texture = ExtResource("1_m2qih")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, -2)
+shape = SubResource("RectangleShape2D_mt675")

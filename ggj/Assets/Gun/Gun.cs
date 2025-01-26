@@ -25,7 +25,7 @@ public partial class Gun : Node2D
     public void Shoot(Vector2 shootDir){
 		if(audioStream.Stream == null && shootSound != null)
 			audioStream.Stream = shootSound;
-		else if(audioStream.Stream != null)
+		if(audioStream.Stream != null)
 			audioStream.Play();
 
 		Node2D bulletInstance = (Node2D)bullet.Instantiate();

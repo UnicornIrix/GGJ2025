@@ -14,3 +14,5 @@ audioStream = NodePath("AudioStreamPlayer2D")
 [node name="Marker2D" type="Marker2D" parent="."]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = 5.0
+max_polyphony = 4

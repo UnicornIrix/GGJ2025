@@ -1,7 +1,7 @@
-[gd_scene load_steps=52 format=3 uid="uid://ds3p30hrb3g0p"]
+[gd_scene load_steps=53 format=3 uid="uid://ds3p30hrb3g0p"]
 
 [ext_resource type="Script" path="res://Assets/Player/Player.cs" id="1_cs8vg"]
-[ext_resource type="AudioStream" uid="uid://bgc6h0rdyochk" path="res://Assets/SFX/bubble-sound-43207.mp3" id="2_ksbcw"]
+[ext_resource type="AudioStream" uid="uid://dsgynkxvvaw4y" path="res://Assets/SFX/bubble_pop_1.mp3" id="2_6royy"]
 [ext_resource type="Texture2D" uid="uid://vr1lviawsyvt" path="res://Assets/pop_A_1.0_1.png" id="3_micjs"]
 [ext_resource type="Texture2D" uid="uid://bwtyuahmocgow" path="res://Assets/Player/bobi_front.png" id="3_s76cp"]
 [ext_resource type="Texture2D" uid="uid://bma5koi2aghe5" path="res://Assets/Player/bobi_right.png" id="3_ut1xe"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://diynvsfttwsbh" path="res://Assets/pop_A_1.0_4.png" id="6_ypifx"]
 [ext_resource type="Texture2D" uid="uid://mjs3y8me2ixt" path="res://Assets/pop_A_1.0_5.png" id="7_1tcwc"]
 [ext_resource type="Texture2D" uid="uid://d3j78u1051mwa" path="res://Assets/pop_A_1.0_6.png" id="8_stosk"]
+[ext_resource type="AudioStream" uid="uid://bhnkhbodnm4h3" path="res://Assets/SFX/bubble_die.mp3" id="10_fno5a"]
 [ext_resource type="Texture2D" uid="uid://tryogn0w4ck8" path="res://Assets/Player/bobi_front_1.png" id="12_njinx"]
 [ext_resource type="Texture2D" uid="uid://c6t5c0evv35bf" path="res://Assets/Player/bobi_back_1.png" id="12_sqh8m"]
 [ext_resource type="Texture2D" uid="uid://tcql3f6qwg3b" path="res://Assets/Player/bobi_front_2.png" id="13_81mia"]
@@ -80,6 +81,21 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "audio"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AudioStreamPlayer2D")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("10_fno5a")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/4/use_blend = true
 
 [sub_resource type="Animation" id="Animation_lkf2b"]
 resource_name = "Down"
@@ -692,13 +708,13 @@ animation = &"Up"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_eroeh"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_yu8ab")
-blend_point_0/pos = Vector2(0, 1)
+blend_point_0/pos = Vector2(0, 0.9)
 blend_point_1/node = SubResource("AnimationNodeAnimation_k16lk")
-blend_point_1/pos = Vector2(0.9, 0)
+blend_point_1/pos = Vector2(1, 0)
 blend_point_2/node = SubResource("AnimationNodeAnimation_8qu8p")
-blend_point_2/pos = Vector2(-0.9, 0)
+blend_point_2/pos = Vector2(-1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_63q4r")
-blend_point_3/pos = Vector2(0, -1)
+blend_point_3/pos = Vector2(0, -0.9)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_q61y2"]
@@ -715,13 +731,13 @@ animation = &"WalkLeft"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_gcycx"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_q61y2")
-blend_point_0/pos = Vector2(0, 1)
+blend_point_0/pos = Vector2(0, 0.9)
 blend_point_1/node = SubResource("AnimationNodeAnimation_6f5k8")
-blend_point_1/pos = Vector2(0, -1)
+blend_point_1/pos = Vector2(0, -0.9)
 blend_point_2/node = SubResource("AnimationNodeAnimation_sg8jo")
-blend_point_2/pos = Vector2(0.9, 0)
+blend_point_2/pos = Vector2(1, 0)
 blend_point_3/node = SubResource("AnimationNodeAnimation_qwj1m")
-blend_point_3/pos = Vector2(-0.9, 0)
+blend_point_3/pos = Vector2(-1, 0)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g4id0"]
@@ -752,6 +768,7 @@ transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(26, 62)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("animTree", "gun", "timeBetweenShootTimer")]
+z_index = 2
 collision_layer = 2
 collision_mask = 273
 motion_mode = 1
@@ -760,7 +777,7 @@ animTree = NodePath("AnimationTree")
 gun = NodePath("Gun")
 timeBetweenShootTimer = NodePath("Timer")
 sounds = {
-"shoot": ExtResource("2_ksbcw")
+"shoot": ExtResource("2_6royy")
 }
 metadata/_edit_group_ = true
 
@@ -792,5 +809,6 @@ wait_time = 0.4
 one_shot = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+volume_db = 5.0
 
 [connection signal="timeout" from="Timer" to="." method="ShootWaitTimeout"]
