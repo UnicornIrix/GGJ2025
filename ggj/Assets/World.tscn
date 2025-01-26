@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://273kuyssjtqs" path="res://Assets/Environment/Bancone.tscn" id="2_f77ch"]
 [ext_resource type="Texture2D" uid="uid://bsnyqsc3l01no" path="res://Assets/BG/env_3.png" id="3_44ol4"]
 [ext_resource type="PackedScene" uid="uid://fwfgbjvgmhpv" path="res://Assets/SpawnPoints/SpawnPointHandler.tscn" id="3_gub82"]
-[ext_resource type="AudioStream" uid="uid://bkxkmpgcqnf67" path="res://Assets/SFX/background_music.mp3" id="4_jqsgx"]
+[ext_resource type="AudioStream" uid="uid://covg0es5pk34d" path="res://Assets/SFX/BG_MUSIC/dirty-outlaws-the-sun-sets-in-the-west-244225.mp3" id="4_fwla6"]
 [ext_resource type="PackedScene" uid="uid://bnorf5yue1bsg" path="res://Assets/Environment/Chair.tscn" id="5_bkrow"]
 [ext_resource type="PackedScene" uid="uid://vv0kt07isl5g" path="res://Assets/Environment/Table.tscn" id="6_mb6w3"]
 [ext_resource type="PackedScene" uid="uid://inhw40kook77" path="res://Assets/Environment/BubbleTeaEmpty.tscn" id="7_gfd2p"]
@@ -109,7 +109,7 @@ shape = SubResource("RectangleShape2D_8mjqb")
 [node name="Player" parent="." instance=ExtResource("1_x2p1c")]
 z_index = 0
 y_sort_enabled = true
-position = Vector2(1768, 2488)
+position = Vector2(2000, 1864)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = 0
@@ -125,13 +125,14 @@ spawnsNum = 8
 position = Vector2(3144, 2848)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_jqsgx")
+stream = ExtResource("4_fwla6")
 volume_db = -15.0
 autoplay = true
 parameters/looping = true
 
 [node name="Environment" type="Node2D" parent="."]
 y_sort_enabled = true
+metadata/_edit_group_ = true
 
 [node name="Chair" parent="Environment" instance=ExtResource("5_bkrow")]
 position = Vector2(2928, 2624)
@@ -218,65 +219,81 @@ position = Vector2(480, 416)
 position = Vector2(376, 1640)
 
 [node name="BubbleTeaEmpty" parent="Environment" instance=ExtResource("7_gfd2p")]
+z_index = -1
 position = Vector2(1216, 2176)
 
 [node name="BubbleTeaEmpty2" parent="Environment" instance=ExtResource("7_gfd2p")]
+z_index = -1
 position = Vector2(1616, 1680)
 
 [node name="Table" parent="Environment" instance=ExtResource("6_mb6w3")]
 position = Vector2(640, 2640)
 
+[node name="BubbleTeaDropped" parent="Environment" instance=ExtResource("9_3c73p")]
+z_index = -1
+position = Vector2(4136, 2480)
+
+[node name="BubbleTeaDropped2" parent="Environment" instance=ExtResource("9_3c73p")]
+z_index = -1
+position = Vector2(416, 576)
+
+[node name="BubbleTeaDropped3" parent="Environment" instance=ExtResource("9_3c73p")]
+z_index = -1
+position = Vector2(696, 2160)
+
+[node name="BubbleTeaDropped4" parent="Environment" instance=ExtResource("9_3c73p")]
+z_index = -1
+position = Vector2(2160, 592)
+
+[node name="BubbleTeaDropped5" parent="Environment" instance=ExtResource("9_3c73p")]
+z_index = -1
+position = Vector2(2288, 2264)
+
+[node name="BubbleTeaDropped6" parent="Environment" instance=ExtResource("9_3c73p")]
+z_index = -1
+position = Vector2(5504, 840)
+
+[node name="BubbleTeaDropped7" parent="Environment" instance=ExtResource("9_3c73p")]
+z_index = -1
+position = Vector2(2784, 2744)
+
+[node name="BubbleTeaDropped8" parent="Environment" instance=ExtResource("9_3c73p")]
+z_index = -1
+position = Vector2(1056, 1016)
+rotation = 3.14159
+
+[node name="BubbleTeaDropped9" parent="Environment" instance=ExtResource("9_3c73p")]
+z_index = -1
+position = Vector2(256, 1792)
+rotation = 3.14159
+
+[node name="BubbleTeaDropped10" parent="Environment" instance=ExtResource("9_3c73p")]
+z_index = -1
+position = Vector2(3176, 536)
+rotation = 3.14159
+
+[node name="BubbleTeaDropped11" parent="Environment" instance=ExtResource("9_3c73p")]
+z_index = -1
+position = Vector2(392, 2912)
+rotation = 3.14159
+
+[node name="BubbleTeaDropped12" parent="Environment" instance=ExtResource("9_3c73p")]
+z_index = -1
+position = Vector2(4368, 1744)
+rotation = 3.14159
+
+[node name="BubbleTeaDropped13" parent="Environment" instance=ExtResource("9_3c73p")]
+z_index = -1
+position = Vector2(2944, 1896)
+rotation = 3.14159
+
+[node name="BubbleTeaDropped14" parent="Environment" instance=ExtResource("9_3c73p")]
+z_index = -1
+position = Vector2(5096, 2232)
+rotation = 3.14159
+
 [node name="Table2" parent="Environment" instance=ExtResource("6_mb6w3")]
 position = Vector2(928, 2104)
-
-[node name="BubbleTeaDropped" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
-position = Vector2(3208, 376)
-
-[node name="BubbleTeaDropped2" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
-position = Vector2(-512, -1528)
-
-[node name="BubbleTeaDropped3" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
-position = Vector2(-232, 56)
-
-[node name="BubbleTeaDropped4" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
-position = Vector2(1232, -1512)
-
-[node name="BubbleTeaDropped5" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
-position = Vector2(1360, 160)
-
-[node name="BubbleTeaDropped6" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
-position = Vector2(4576, -1264)
-
-[node name="BubbleTeaDropped7" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
-position = Vector2(1856, 640)
-
-[node name="BubbleTeaDropped8" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
-position = Vector2(128, -1088)
-scale = Vector2(-1, -1)
-
-[node name="BubbleTeaDropped9" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
-position = Vector2(-672, -312)
-scale = Vector2(-1, -1)
-
-[node name="BubbleTeaDropped10" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
-position = Vector2(2248, -1568)
-scale = Vector2(-1, -1)
-
-[node name="BubbleTeaDropped11" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
-position = Vector2(-536, 808)
-scale = Vector2(-1, -1)
-
-[node name="BubbleTeaDropped12" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
-position = Vector2(3440, -360)
-scale = Vector2(-1, -1)
-
-[node name="BubbleTeaDropped13" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
-position = Vector2(2016, -208)
-scale = Vector2(-1, -1)
-
-[node name="BubbleTeaDropped14" parent="Environment/Table2" instance=ExtResource("9_3c73p")]
-position = Vector2(4168, 128)
-scale = Vector2(-1, -1)
 
 [node name="Table5" parent="Environment" instance=ExtResource("6_mb6w3")]
 position = Vector2(1008, 872)

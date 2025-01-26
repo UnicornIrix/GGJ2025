@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Assets/Cutscene/VideoStreamPlayerController.cs" id="1_r4al5"]
 [ext_resource type="VideoStream" path="res://Assets/Cutscene/cutscene_1_.ogv" id="1_s47st"]
-[ext_resource type="AudioStream" uid="uid://di37e2p1d7w6u" path="res://Assets/SFX/gunshot_sound.mp3" id="3_ykmf2"]
+[ext_resource type="AudioStream" uid="uid://dsgynkxvvaw4y" path="res://Assets/SFX/bubble_pop_1.mp3" id="3_d3388"]
 [ext_resource type="Texture2D" uid="uid://dhdpfl4wy0k3d" path="res://Assets/Cutscene/Scene_4.png" id="4_qqcdg"]
 
 [node name="VideoStreamPlayer" type="Node2D" node_paths=PackedStringArray("videoStreamPlayer", "control", "audioStream")]
@@ -18,7 +18,7 @@ stream = ExtResource("1_s47st")
 autoplay = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_ykmf2")
+stream = ExtResource("3_d3388")
 volume_db = 24.0
 
 [node name="Control" type="Control" parent="."]
