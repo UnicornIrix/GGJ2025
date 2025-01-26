@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Godot.Collections;
 using System.Collections.Generic;
 
 public partial class SpawnPointHandler : Node2D
@@ -14,6 +15,18 @@ public partial class SpawnPointHandler : Node2D
 	[Export]
 	int spawnsNum;
 
+	public int SpawnsNum {
+		get{return spawnsNum;}
+		set{
+			if(value > 8)
+			{
+				spawnsNum = 8;
+			}
+			else
+				spawnsNum = value;
+		}
+	}
+
 	[Export]
 	bool hasMaxEnemyNum;
 
@@ -22,6 +35,9 @@ public partial class SpawnPointHandler : Node2D
 
 	[Export]
 	int maxEnemyCurrentNumAlive;
+
+	[Export]
+	Array<Vector2> spawnPositions;
 	
 	
 	int totalSpawnedEnemies=0;
@@ -38,20 +54,14 @@ public partial class SpawnPointHandler : Node2D
 		// Spawn spawns with distance of 500
 		for(int i=0; i < spawnsNum; i++)
 		{
-			Vector2 randPos = new Vector2((float)random.NextDouble() * mapSize.X, (float)random.NextDouble() * mapSize.Y);
-
-			if(i > 0)
-			{
-				while(randPos.DistanceTo(spawns[i-1].Position) < 50)
-				{
-					randPos = new Vector2((float)random.NextDouble() * mapSize.X, (float)random.NextDouble() * mapSize.Y);
-				}
-			}
+			int spawnPoint = random.Next(0, spawnPositions.Count);
 
 			Node2D spawnInstance = (Node2D)spawnScene.Instantiate();
-			spawnInstance.Position = randPos;
+			spawnInstance.Position = spawnPositions[spawnPoint];
 			AddChild(spawnInstance); 
+
 			spawns.Add(spawnInstance);
+			spawnPositions.Remove(spawnPositions[spawnPoint]);
 		}
 	}
 
@@ -59,22 +69,27 @@ public partial class SpawnPointHandler : Node2D
     {
         if(enemyCurrentNum < maxEnemyCurrentNumAlive)
 		{
-			if(!hasMaxEnemyNum)
+			if(hasMaxEnemyNum)
 			{
 				if(totalSpawnedEnemies < maxEnemyTotalNum)
 				{
 					int spawnToUse = random.Next(0, spawns.Count);
-
-					((Spawn)spawns[spawnToUse]).CreateEnemy();
-					totalSpawnedEnemies += 1; 
+					if(!((Spawn)spawns[spawnToUse]).isOnScreen)
+					{
+						((Spawn)spawns[spawnToUse]).CreateEnemy();
+						totalSpawnedEnemies += 1;
+					}
 				}
 			}
 			else
 			{
 				int spawnToUse = random.Next(0, spawns.Count);
 
-				((Spawn)spawns[spawnToUse]).CreateEnemy();
-				totalSpawnedEnemies += 1; 
+				if(!((Spawn)spawns[spawnToUse]).isOnScreen)
+				{
+					((Spawn)spawns[spawnToUse]).CreateEnemy();
+					
+				}
 			}
 		}
     }
@@ -87,6 +102,7 @@ public partial class SpawnPointHandler : Node2D
 	public void SubtractCurrentAliveENemy()
 	{
 		enemyCurrentNum -= 1;
+		GD.Print("Died");
 	}
 
 }

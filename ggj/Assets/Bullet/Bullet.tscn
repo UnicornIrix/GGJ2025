@@ -13,7 +13,7 @@ radius = 15.0333
 collision_layer = 128
 gravity_scale = 0.0
 script = ExtResource("1_nnvkm")
-speed = 650.0
+speed = 850.0
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

@@ -3,11 +3,14 @@
 [ext_resource type="Script" path="res://Assets/Gun/Gun.cs" id="1_313iw"]
 [ext_resource type="PackedScene" uid="uid://dpid4bpnkc1hn" path="res://Assets/Bullet/EnemyBullet.tscn" id="2_up8u6"]
 
-[node name="EnemyGun" type="Node2D" node_paths=PackedStringArray("bulletGenPoint")]
+[node name="EnemyGun" type="Node2D" node_paths=PackedStringArray("bulletGenPoint", "audioStream")]
 script = ExtResource("1_313iw")
 bullet = ExtResource("2_up8u6")
 bulletGenPoint = NodePath("BulletGenerationMarker")
+audioStream = NodePath("AudioStreamPlayer2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="BulletGenerationMarker" type="Marker2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

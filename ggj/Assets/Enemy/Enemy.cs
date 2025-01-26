@@ -54,6 +54,10 @@ public partial class Enemy : CharacterBody2D
 
 	bool isOnCamera;
 
+	bool isDead;
+
+	AnimationNodeStateMachinePlayback stateMachine;
+
 	SpawnPointHandler spawnPointHandler;
 
 	public SpawnPointHandler SpawnPointHandler
@@ -71,24 +75,27 @@ public partial class Enemy : CharacterBody2D
 	public override void _Ready()
 	{
 		spawnPointHandler?.AddCurrentAliveEnemy();
+		stateMachine = (AnimationNodeStateMachinePlayback)animTree.Get("parameters/playback");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-
-		switch (state)
+		if(!isDead)
 		{
-			case States.Normal:
-				NormalState();
-				break;
-			case States.Chase:
-				ChaseState();
-				break;
-			case States.Attack:
-				{
-					AttackStateAsync();
+			switch (state)
+			{
+				case States.Normal:
+					NormalState();
 					break;
-				}
+				case States.Chase:
+					ChaseState();
+					break;
+				case States.Attack:
+					{
+						AttackStateAsync();
+						break;
+					}
+			}
 		}
 	}
 
@@ -100,6 +107,7 @@ public partial class Enemy : CharacterBody2D
 		{
 			velocity = direction * Speed;
 			lastDir = direction;
+
 		}
 		else
 		{
@@ -107,7 +115,11 @@ public partial class Enemy : CharacterBody2D
 		}
 
 		Velocity = velocity;
-		animTree.Set("parameters/blend_position", lastDir);
+		if(stateMachine.GetCurrentNode() != "Idle")	
+		{
+			stateMachine.Travel("Idle");
+		}	
+		animTree.Set("parameters/Idle/blend_position", lastDir);
 		MoveAndSlide();
 	}
 
@@ -142,10 +154,13 @@ public partial class Enemy : CharacterBody2D
 		if (!isOnCamera || this.GlobalPosition.DistanceTo(playerTarget.GlobalPosition) > shootRange)
 		{
 			await ToSignal(GetTree().CreateTimer(0.5f), "timeout");
-			if (this.GlobalPosition.DistanceTo(playerTarget.GlobalPosition) > shootRange)
+			if (playerTarget != null)
 			{
-				ChangeState(States.Chase);
-				return;
+				if (this.GlobalPosition.DistanceTo(playerTarget.GlobalPosition) > shootRange)
+				{
+					ChangeState(States.Chase);
+					return;
+				}
 			}
 		}
 
@@ -218,7 +233,10 @@ public partial class Enemy : CharacterBody2D
 		health -= 1;
 
 		if (health <= 0)
-			Dead();
+		{
+			isDead = true;
+			stateMachine.Travel("Dead");
+		}
 
 	}
 

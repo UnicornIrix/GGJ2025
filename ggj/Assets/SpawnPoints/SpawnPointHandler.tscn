@@ -6,8 +6,8 @@
 [node name="SpawnPointHandler" type="Node2D"]
 script = ExtResource("1_cakvf")
 spawnScene = ExtResource("2_mrvfq")
-mapSize = Vector2(1920, 1080)
+mapSize = Vector2(5760, 3240)
 spawnsNum = 4
-hasMaxEnemyNum = true
 maxEnemyTotalNum = 100
-maxEnemyCurrentNumAlive = 5
+maxEnemyCurrentNumAlive = 15
+spawnPositions = Array[Vector2]([Vector2(800, 800), Vector2(2800, 950), Vector2(2848, 1920), Vector2(250, 2840), Vector2(4200, 950), Vector2(5300, 2400), Vector2(5400, 1400), Vector2(3150, 2850)])

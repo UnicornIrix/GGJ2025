@@ -1,10 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://xrgfhpyh4re7"]
+[gd_scene load_steps=4 format=3 uid="uid://xrgfhpyh4re7"]
 
 [ext_resource type="Script" path="res://Assets/SpawnPoints/Spawn.cs" id="1_3hk0e"]
 [ext_resource type="PackedScene" uid="uid://b8rkaqsio0tvb" path="res://Assets/Enemy/Enemy.tscn" id="2_um50c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nwxr"]
 
 [node name="Spawn" type="Node2D"]
 script = ExtResource("1_3hk0e")
 enemyScene = ExtResource("2_um50c")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+rect = Rect2(-10, -10, 20.075, 20)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_6nwxr")
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="EnteredOnScreen"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="ExitedOffScreen"]
+[connection signal="body_entered" from="Area2D" to="." method="BodyEntered"]

@@ -1,31 +1,90 @@
-[gd_scene load_steps=17 format=3 uid="uid://b8rkaqsio0tvb"]
+[gd_scene load_steps=29 format=3 uid="uid://b8rkaqsio0tvb"]
 
 [ext_resource type="Script" path="res://Assets/Enemy/Enemy.cs" id="1_ekytm"]
 [ext_resource type="Texture2D" uid="uid://ddnol13543xqu" path="res://Assets/Enemy/sceriffo_1.png" id="2_0pyov"]
+[ext_resource type="Texture2D" uid="uid://vr1lviawsyvt" path="res://Assets/pop_A_1.0_1.png" id="2_k05hw"]
 [ext_resource type="PackedScene" uid="uid://d0lqrxraktaya" path="res://Assets/Gun/EnemyGun.tscn" id="3_1h57y"]
+[ext_resource type="Texture2D" uid="uid://bpfee44csc4xp" path="res://Assets/pop_A_1.0_2.png" id="3_snlac"]
+[ext_resource type="Texture2D" uid="uid://diynvsfttwsbh" path="res://Assets/pop_A_1.0_4.png" id="4_luqk0"]
+[ext_resource type="Texture2D" uid="uid://bkbwe62y04qgg" path="res://Assets/pop_A_1.0_3.png" id="5_35pov"]
+[ext_resource type="Texture2D" uid="uid://d3j78u1051mwa" path="res://Assets/pop_A_1.0_6.png" id="5_uurnt"]
+[ext_resource type="Texture2D" uid="uid://mjs3y8me2ixt" path="res://Assets/pop_A_1.0_5.png" id="7_hrxx7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3wh6d"]
 radius = 40.0
 height = 100.0
 
-[sub_resource type="Animation" id="Animation_i0goj"]
-resource_name = "Up"
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_hhq4g"]
+resource_name = "Dead"
+length = 0.5
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("EnemyGun:position")
+tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_k05hw"), ExtResource("3_snlac"), ExtResource("5_35pov"), ExtResource("4_luqk0"), ExtResource("7_hrxx7"), ExtResource("5_uurnt")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, -10)]
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Dead"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
 }
 
-[sub_resource type="Animation" id="Animation_gtjwt"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_jvi84"]
+resource_name = "Down"
+loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -36,7 +95,43 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(39, -64)]
+"values": [Vector2(0, 10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_0pyov")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.25, 0.25)]
 }
 
 [sub_resource type="Animation" id="Animation_md57a"]
@@ -54,10 +149,45 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(-39, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_0pyov")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.25, 0.25)]
+}
 
-[sub_resource type="Animation" id="Animation_jvi84"]
-resource_name = "Down"
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_gtjwt"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -68,7 +198,55 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 10)]
+"values": [Vector2(39, -64)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_0pyov")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:offset")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.25, 0.25)]
 }
 
 [sub_resource type="Animation" id="Animation_5xheb"]
@@ -86,9 +264,98 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(39, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_0pyov")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="Animation" id="Animation_i0goj"]
+resource_name = "Up"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyGun:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_0pyov")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.25, 0.25)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iuioh"]
 _data = {
+"Dead": SubResource("Animation_hhq4g"),
 "Down": SubResource("Animation_jvi84"),
 "Left": SubResource("Animation_md57a"),
 "RESET": SubResource("Animation_gtjwt"),
@@ -96,28 +363,47 @@ _data = {
 "Up": SubResource("Animation_i0goj")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_itf1i"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_awsb0"]
+animation = &"Dead"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sqv68"]
 animation = &"Down"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_npptn"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a6nl6"]
 animation = &"Up"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3fkyy"]
-animation = &"Right"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5t3k1"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pwng4"]
 animation = &"Left"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_51v8l"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_itf1i")
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_64acl"]
+animation = &"Right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_v7qdq"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_sqv68")
 blend_point_0/pos = Vector2(0, 1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_npptn")
+blend_point_1/node = SubResource("AnimationNodeAnimation_a6nl6")
 blend_point_1/pos = Vector2(0, -1)
-blend_point_2/node = SubResource("AnimationNodeAnimation_3fkyy")
-blend_point_2/pos = Vector2(0.9, 0)
-blend_point_3/node = SubResource("AnimationNodeAnimation_5t3k1")
-blend_point_3/pos = Vector2(-0.9, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_pwng4")
+blend_point_2/pos = Vector2(-0.9, 0)
+blend_point_3/node = SubResource("AnimationNodeAnimation_64acl")
+blend_point_3/pos = Vector2(0.9, 0)
 blend_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_efxqo"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5527b"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7aad3"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_afcib"]
+states/Dead/node = SubResource("AnimationNodeAnimation_awsb0")
+states/Dead/position = Vector2(612, 100)
+states/Idle/node = SubResource("AnimationNodeBlendSpace2D_v7qdq")
+states/Idle/position = Vector2(391, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_efxqo"), "Idle", "Dead", SubResource("AnimationNodeStateMachineTransition_5527b"), "Dead", "End", SubResource("AnimationNodeStateMachineTransition_7aad3")]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p5lpe"]
 radius = 1107.0
@@ -135,7 +421,6 @@ shootRange = 800.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_0pyov")
-offset = Vector2(0, -100)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 35)
@@ -147,9 +432,9 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeBlendSpace2D_51v8l")
+tree_root = SubResource("AnimationNodeStateMachine_afcib")
 anim_player = NodePath("../AnimationPlayer")
-parameters/blend_position = Vector2(0, 0)
+parameters/Idle/blend_position = Vector2(-0.000867307, 0)
 
 [node name="EnemyGun" parent="." instance=ExtResource("3_1h57y")]
 position = Vector2(39, -64)
@@ -170,6 +455,8 @@ shape = SubResource("CircleShape2D_p5lpe")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 scale = Vector2(2.30534, 2.23159)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="timeout" from="ShootTimer" to="." method="ShootWaitTimeout"]
 [connection signal="timeout" from="AttackSubStateTimer" to="." method="AttackSubStateTimerTimeout"]

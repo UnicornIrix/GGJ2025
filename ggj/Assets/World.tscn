@@ -1,18 +1,116 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwnvvkbovdx40"]
+[gd_scene load_steps=16 format=3 uid="uid://bwnvvkbovdx40"]
 
 [ext_resource type="PackedScene" uid="uid://ds3p30hrb3g0p" path="res://Assets/Player/Player.tscn" id="1_x2p1c"]
+[ext_resource type="Texture2D" uid="uid://bsnyqsc3l01no" path="res://Assets/BG/env_3.png" id="3_44ol4"]
 [ext_resource type="PackedScene" uid="uid://fwfgbjvgmhpv" path="res://Assets/SpawnPoints/SpawnPointHandler.tscn" id="3_gub82"]
-[ext_resource type="Texture2D" uid="uid://cnbg2k2u5cyhf" path="res://env_1.png" id="4_1xykk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r6f4x"]
+size = Vector2(5760, 362.158)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p7wf8"]
+size = Vector2(128, 1712)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2h1wh"]
+size = Vector2(272, 912)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fl8nd"]
+size = Vector2(3344, 208)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ylyk"]
+size = Vector2(499, 864)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j07kc"]
+size = Vector2(1856, 616)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s4hra"]
+size = Vector2(149, 2173)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cewux"]
+size = Vector2(2336, 323)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqx5b"]
+size = Vector2(548, 1016)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fdx6k"]
+size = Vector2(2464, 424)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwk7k"]
+size = Vector2(496, 328)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8mjqb"]
+size = Vector2(472, 424)
 
 [node name="World" type="Node2D"]
-y_sort_enabled = true
+
+[node name="Walls" type="StaticBody2D" parent="." groups=["Walls"]]
+z_index = -3
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Walls"]
+texture = ExtResource("3_44ol4")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2880, 170.921)
+shape = SubResource("RectangleShape2D_r6f4x")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls"]
+position = Vector2(64, 2392)
+shape = SubResource("RectangleShape2D_p7wf8")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls"]
+position = Vector2(136, 776)
+shape = SubResource("RectangleShape2D_2h1wh")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Walls"]
+position = Vector2(1800, 3144)
+shape = SubResource("RectangleShape2D_fl8nd")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Walls"]
+position = Vector2(3718.5, 2816)
+shape = SubResource("RectangleShape2D_7ylyk")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Walls"]
+position = Vector2(4896, 2932)
+shape = SubResource("RectangleShape2D_j07kc")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Walls"]
+position = Vector2(5749.5, 1665.5)
+shape = SubResource("RectangleShape2D_s4hra")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Walls"]
+position = Vector2(4592, 478.5)
+shape = SubResource("RectangleShape2D_cewux")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Walls"]
+position = Vector2(3694, 1092)
+shape = SubResource("RectangleShape2D_lqx5b")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Walls"]
+position = Vector2(2184, 1380)
+shape = SubResource("RectangleShape2D_fdx6k")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="Walls"]
+position = Vector2(3720, 1764)
+shape = SubResource("RectangleShape2D_vwk7k")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls"]
+position = Vector2(240, 1384)
+shape = SubResource("RectangleShape2D_8mjqb")
 
 [node name="Player" parent="." instance=ExtResource("1_x2p1c")]
-position = Vector2(2272, 2371)
+y_sort_enabled = true
+position = Vector2(1768, 2488)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_left = 0
+limit_top = 0
+limit_right = 5760
+limit_bottom = 3240
+position_smoothing_enabled = true
 
 [node name="SpawnPointHandler" parent="." instance=ExtResource("3_gub82")]
+spawnsNum = 8
 
-[node name="TextureRect" type="Sprite2D" parent="."]
-z_index = -2
-texture = ExtResource("4_1xykk")
-centered = false
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(3144, 2848)
