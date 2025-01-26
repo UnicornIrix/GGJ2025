@@ -84,6 +84,10 @@ public partial class Enemy : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if(GlobalPosition.X > 5760 || GlobalPosition.X < 0 || GlobalPosition.Y < 0 || GlobalPosition.Y > 3240)
+			Dead();
+
+
 		if(!isDead)
 		{
 			switch (state)
