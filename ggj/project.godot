@@ -14,7 +14,6 @@ config/name="GGJ"
 run/main_scene="res://Assets/Cutscene/VideoStreamPlayer.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
-boot_splash/image="res://Assets/Title_1_1.1_1.png"
 config/icon="res://icon.svg"
 boot_splash/minimum_display_time=2000
 
